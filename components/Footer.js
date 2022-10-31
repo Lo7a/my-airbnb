@@ -8,30 +8,21 @@ function Footer() {
         <p>How it works</p>
         <p>Newsroom</p>
         <p>Investors</p>
-        <p>Airbnb Plus</p>
-        <p>Airbnb Luxe</p>
       </div>
       <div className="space-y-4 text-xm text-gray-800">
-        <h5 className="font-bold">COMMUNITY</h5>
-        <p>Accessibility</p>
-        <p>This is not a real site</p>
-        <p>Investors</p>
-        <p>Airbnb Plus</p>
-        <p>Airbnb Luxe</p>
+        <h5 className="font-bold">COMMUNITY</h5> <p>Facebook</p>
+        <p>Twitter</p>
+        <p>Instagram</p>
       </div>
       <div className="space-y-4 text-xm text-gray-800">
         <h5 className="font-bold">HOST</h5>
         <p>How It Works</p>
-        <p>Newsroom</p>
-        <p>Investors</p>
-        <p>Airbnb Plus</p>
-        <p>Airbnb Luxe</p>
+        <p>Add Ur Asset</p>
+        <p>Meet Professional People</p>
       </div>
       <div className="space-y-4 text-xm text-gray-800">
         <h5 className="font-bold">SUPPORT</h5>
         <p>Help Center</p>
-        <p>Newsroom</p>
-        <p>Investors</p>
         <p>Airbnb Plus</p>
         <p>Airbnb Luxe</p>
       </div>

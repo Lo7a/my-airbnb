@@ -1,18 +1,59 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+
 import Image from "next/image";
 import {
   MagnifyingGlassIcon,
   GlobeAltIcon,
   Bars3Icon,
   UserCircleIcon,
+  UsersIcon,
 } from "@heroicons/react/24/solid";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRangePicker } from "react-date-range";
 
-function Header() {
+function Header({ placeholder }) {
+  const [searchInput, setsSearchInput] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const router = useRouter();
+
+  const handleSelect = (ranges) => {
+    setStartDate(ranges.selection.startDate);
+    setEndDate(ranges.selection.endDate);
+  };
+
+  const restInput = () => {
+    setsSearchInput("");
+  };
+
+  const search = () => {
+    router.push({
+      pathname: "/search",
+      query: {
+        location: searchInput,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        numberOfGuests,
+      },
+    });
+  };
+
+  const selectionRange = {
+    startDate: startDate,
+    endDate: endDate,
+    key: "selection",
+  };
+
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
-      {/* left */}
-      <div className="relative flex items-center h-14 cursor-pointer my-auto">
+      <div
+        onClick={() => router.push("/")}
+        className="relative flex items-center h-14 cursor-pointer my-auto"
+      >
         <Image
           src="/logobackground.png"
           layout="fill"
@@ -20,16 +61,16 @@ function Header() {
           objectPosition="left"
         />
       </div>
-      {/* mid */}
       <div className="flex items-center md:border-2 rounded-full py-2 md:shadow-sm ">
         <input
-          className="flex-grow pl-5 bg-transparent outline-none md:text-base text-xs text-gray-600 placeholder-gray-400"
+          value={searchInput}
+          onChange={(e) => setsSearchInput(e.target.value)}
+          className="flex-grow pl-5 bg-transparent outline-none placeholder:text-center md:placeholder:text-left text-center md:text-left md:text-base text-xs text-gray-600 placeholder-gray-400"
           type="text"
-          placeholder="Search your perfect vacation"
+          placeholder={placeholder || "Search your vacation"}
         />
         <MagnifyingGlassIcon className="hidden md:inline-flex h-8 bg-[#e47831]  text-white rounded-full p-2 cursor-pointer md:mx-3" />
       </div>
-      {/* right */}
       <div className="flex items-center space-x-3 justify-end text-gray-500 ">
         <p className="hidden md:inline cur ">Become a host</p>
         <GlobeAltIcon className="h-6 " />
@@ -38,6 +79,38 @@ function Header() {
           <UserCircleIcon className="h-6" />
         </div>
       </div>
+
+      {searchInput && (
+        <div className="flex flex-col col-span-3 mx-auto mt-5">
+          <DateRangePicker
+            ranges={[selectionRange]}
+            minDate={new Date()}
+            rangeColors={["#e47831"]}
+            onChange={handleSelect}
+          />
+          <div className="flex items-center border-b shadow-sm mb-4">
+            <h2 className="text-2xl flex-grow font-semibold">
+              Number Of Guests
+            </h2>
+            <UsersIcon className="h-5" />
+            <input
+              value={numberOfGuests}
+              onChange={(e) => setNumberOfGuests(e.target.value)}
+              min={1}
+              className="w-12 pl-4 text-xl outline-none text-[#e47831]"
+              type="number"
+            ></input>
+          </div>
+          <div className="flex">
+            <button onClick={restInput} className="flex-grow text-gray-600 ">
+              Cancle
+            </button>
+            <button onClick={search} className="flex-grow text-[#e47831]  ">
+              Search
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
