@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import ProgressBar from "@badrap/bar-of-progress";
 import { Router } from "next/router";
+import { Analytics } from "@vercel/analytics/react";
 
 const progress = new ProgressBar({
   size: 6,
@@ -14,7 +15,11 @@ Router.events.on("routeChangeComplete", progress.finish);
 Router.events.on("routeChangeError", progress.finish);
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Component {...pageProps} />
+      <Analytics />
+    </>
+  );
 }
-
 export default MyApp;
