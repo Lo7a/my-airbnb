@@ -19,6 +19,11 @@ module.exports = {
         source: "/(.*)",
         headers: [
           {
+            key: "Content-Security-Policy",
+            value:
+              "default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'",
+          },
+          {
             key: "X-Frame-Options",
             value: "DENY",
           },
@@ -33,7 +38,7 @@ module.exports = {
           },
           {
             key: "Referrer-Policy",
-            value: "origin-when-cross-origin",
+            value: "no-referrer-when-downgrade",
           },
         ],
       },
