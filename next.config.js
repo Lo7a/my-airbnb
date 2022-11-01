@@ -12,6 +12,29 @@ module.exports = {
       "links.papareact.com",
     ],
   },
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
+        ],
+      },
+    ];
+  },
   env: {
     mapbox_key:
       "pk.eyJ1IjoibGFoYXYiLCJhIjoiY2w5dXR0bWNoMW84NDN3dGZoMGtnazZrOSJ9.r5Uq45QojDg-U6zTNhJiCw",
