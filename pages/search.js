@@ -54,7 +54,7 @@ function Search({ searchResult }) {
           </div>
         </section>
 
-        <section className="sticky top-[76px] h-[calc(100vh-76px)] hidden lg:inline-flex lg:min-w-[400px] xl:inline-flex xl:min-w-[700px]">
+        <section className="hidden">
           <Map searchResult={searchResult} />
         </section>
       </main>
@@ -76,3 +76,5 @@ export async function getServerSideProps() {
     },
   };
 }
+
+/*sticky top-[76px] h-[calc(100vh-76px)] hidden lg:inline-flex lg:min-w-[400px] xl:inline-flex xl:min-w-[700px]*/
